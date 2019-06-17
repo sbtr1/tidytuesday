@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560224085522.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "961036650",
+    "id" : "680BC706",
+    "lastKnownWriteTime" : 1560241496,
+    "last_content_update" : 1560241496,
+    "path" : "~/Documents/R test/ascendas/properties.r",
+    "project_path" : "properties.r",
+    "properties" : {
+        "cursorPosition" : "142,0",
+        "scrollLine" : "113",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

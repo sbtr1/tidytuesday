@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560239828030.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A3990797",
+    "lastKnownWriteTime" : 8241999056958794845,
+    "last_content_update" : 1560239828030,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "C5F7886",
+        "caption" : "address_modelling",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=address_modelling&cache_key=C5F7886",
+        "displayedObservations" : "14367",
+        "environment" : "",
+        "object" : "address_modelling",
+        "preview" : "0",
+        "totalObservations" : "14367",
+        "variables" : "6"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

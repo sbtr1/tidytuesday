@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560241601537.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5E240E3",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1560241601537,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "9adfef75e2ed4dd0a3f1271e5a28bf03",
+        "name" : "model_lm",
+        "title" : "model_lm"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

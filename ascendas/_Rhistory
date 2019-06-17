@@ -1,0 +1,512 @@
+result <- geocode(addresses$address[i], output = "latlona", source = "google")
+addresses$lon[i] <- as.numeric(result[1])
+addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+}
+api <- "AIzaSyDQqMhH9G9uP6PEg77QVFrn9OLT6sKU_0k"
+register_google(key=api)
+for(i in 1:2)
+{
+# Print("Working...")
+result <- geocode(addresses$address[i], output = "latlona", source = "google")
+addresses$lon[i] <- as.numeric(result[1])
+addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+}
+has_google_key()
+for(i in 1:2)
+{
+# Print("Working...")
+result <- geocode(addresses$address[i], output = "latlona", source = "google")
+addresses$lon[i] <- as.numeric(result[1])
+addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+}
+api <- "AIzaSyDQqMhH9G9uP6PEg77QVFrn9OLT6sKU_0k"
+register_google(key=api)
+for(i in 1:2)
+{
+# Print("Working...")
+result <- geocode(addresses$address[i], output = "latlona", source = "google")
+addresses$lon[i] <- as.numeric(result[1])
+addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+}
+View(addresses)
+View(addresses)
+addresses %>%
+ggplot(aes(x=district, y=psf)) +
+geom_point()
+View(addresses)
+addresses %>%
+ggplot(aes(x=District, y=psf)) +
+geom_point()
+addresses %>%
+ggplot(aes(x=District, y=psf)) +
+geom_box()
+addresses %>%
+ggplot(aes(x=District, y=psf)) +
+geom_boxplot()
+addresses %>%
+ggplot(aes(x=District, y=psf)) +
+geom_boxplot() +
+coord_flip()
+library(tidyverse)
+library(ggthemes)
+library(ggridges)
+library(ggmap)
+addresses %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+NULL
+addresses %>%
+mutate(District = fct_reorder(desc(District)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+NULL
+addresses %>%
+mutate(District = fct_reorder((District)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+NULL
+addresses %>%
+mutate(District = fct_reorder((District))) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+NULL
+addresses %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_boxplot() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,20) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+View(addresses)
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges() +
+geom_point() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(jittered_points = TRUE,
+position = position_points_jitter(width = 0.05, height = 0),
+point_shape = '|', point_size = 3, point_alpha = 1, alpha = 0.7) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges() +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.5) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.5, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by District") +
+NULL
+addresses %>%
+mutate`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=Property Type, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.5, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+facet_wrap(~`Property Type`) +
+NULL
+View(addresses)
+#for(i in 1:2)
+#{
+# Print("Working...")
+#result <- geocode(addresses$address[i], output = "latlona", source = "google")
+#addresses$lon[i] <- as.numeric(result[1])
+#addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+#}
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by District") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+facet_wrap(~`Property Type`) +
+NULL
+View(addresses)
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf)) +
+geom_jitter()
+str(addresses)
+summary(addresses)
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, fill=`Property Type`)) +
+geom_jitter()
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_jitter()
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_point()
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_jitter() +
+NULL
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_jitter() +
+theme(axis.title.x = element_blank(),
+legend.position = "bottom") +
+NULL
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_jitter() +
+theme(axis.title.x = element_blank(),
+legend.position = "bottom") +
+labs(title = "Exploring Ascendas and non-Ascendas properties") +
+NULL
+library(tidyverse)
+library(ggthemes)
+library(ggridges)
+library(ggmap)
+addresses <- read_csv("ascendas.csv")
+addresses$address <- paste(addresses$address, ", singapore")
+api <- "AIzaSyDQqMhH9G9uP6PEg77QVFrn9OLT6sKU_0k"
+register_google(key=api)
+#for(i in 1:2)
+#{
+# Print("Working...")
+#result <- geocode(addresses$address[i], output = "latlona", source = "google")
+#addresses$lon[i] <- as.numeric(result[1])
+#addresses$lat[i] <- as.numeric(result[2])
+#origAddress$geoAddress[i] <- as.character(result[3])
+#}
+summary(addresses)
+addresses %>%
+ggplot(aes(x=Ascendas_Building, y=psf, color=`Property Type`)) +
+geom_jitter() +
+theme(axis.title.x = element_blank(),
+legend.position = "bottom") +
+labs(title = "Exploring Ascendas and non-Ascendas properties") +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by District") +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+facet_wrap(~`Property Type`) +
+NULL
+addresses %>%
+mutate(District = fct_reorder(District, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=District, fill=Region)) +
+geom_density_ridges(scale = 1.8, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by District") +
+facet_wrap(~Ascendas_Building) +
+NULL
+addresses %>%
+mutate(`Property Type` = fct_reorder(`Property Type`, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=`Property Type`, fill=`Property Type`)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Property Type") +
+facet_wrap(~Ascendas_Building) +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+facet_wrap(~`Property Type`) +
+NULL
+addresses %>%
+mutate(lease = fct_reorder(lease, psf, fun=median)) %>%
+ggplot(aes(x=psf, y=lease, fill=lease)) +
+geom_density_ridges(scale = 1.2, rel_min_height = 0.01) +
+theme(axis.title.x = element_blank(),
+axis.title.y = element_blank(),
+legend.position = "bottom") +
+xlim(0,15) +
+labs(title = "Distribution of psf by Lease") +
+facet_wrap(~Ascendas_Building) +
+NULL
