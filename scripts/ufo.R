@@ -7,6 +7,8 @@ library(gganimate)
 library(ggthemes)
 library(lubridate)
 library(ggforce)
+library(widyr)
+library(viridis)
 
 
 #read data:
@@ -27,7 +29,7 @@ bigram_counts <- ufo_sightings %>%
 
 #Create graph structure:
 bigram_graph <- bigram_counts %>%
-  filter(n > 225) %>%
+  filter(n > 250) %>%
   graph_from_data_frame()
 
 a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
@@ -36,8 +38,8 @@ a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
 ggraph(bigram_graph, layout = "fr") +
   geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
                  arrow = a, end_cap = circle(.07, 'inches')) +
-  geom_node_point(color = "lightgreen", size = 5) +
-  geom_node_text(aes(label = name), repel = TRUE) +
+  geom_node_point(color = "salmon", size = 3.5) +
+  geom_node_text(aes(label = name), repel = TRUE, size=3.5) +
   theme_void()  +
   theme(plot.margin=unit(c(.5, .5, .5, .5),"cm")) +
   labs(title = "Common Bigrams in UFO Sighting Descriptions",
@@ -73,3 +75,86 @@ ufo_sightings_new %>%
   xlab("Shape")+ylab("Frequency")+
   ggtitle("UFO shapes over the Years",
           subtitle = "Year:{closest_state}")
+
+
+###
+theme_options <- theme(
+  legend.title = element_text(
+    size = 9, margin = margin(b = 5), face = 'bold'
+  ),
+  legend.text = element_text(size = 7),
+  legend.margin = margin(t = 15, b = 15),
+  legend.key.width = unit(10, 'points'),
+  plot.title = element_text(
+    margin = margin(b = 12), color = '#32b37f', size = 14, hjust = 0.5,
+    face = 'bold'
+  ),
+  plot.subtitle = element_text(
+    margin = margin(b = 15), size = 11, hjust = 0.5, face = 'bold'
+  ),
+  plot.caption = element_text(color = '#dadada', size = 6, hjust = 1.09),
+  plot.margin = margin(t = 40, r = 20, b = 20, l = 20)
+)
+
+id <- rownames(ufo_sightings)
+ufo_sightings <- cbind(id=id, ufo_sightings)
+
+ufo_words <- ufo_sightings %>%
+  unnest_tokens('word', description) %>% 
+  filter(!word %in% stop_words$word) %>% 
+  filter(!word %in% c("44","2","3","4","5", "10","33","quot", "nuforc")) %>% 
+  select(id,word)
+
+top_ufo_words <- ufo_words %>%
+  group_by(word) %>%
+  summarize(total = n()) %>%
+  arrange(desc(total)) %>%
+  head(50)
+
+threshold <- 0.05
+
+ufo_word_correlations <- ufo_words %>%
+  filter(word %in% top_ufo_words$word) %>%
+  pairwise_cor(word, id, sort = TRUE) %>%
+  filter(correlation > threshold) %>%
+  arrange(desc(correlation))
+
+ufo_averages_per_word <- ufo_words %>%
+  filter(word %in% top_ufo_words$word) %>%
+  group_by(word) %>%
+  summarize(
+    total = n()
+    #avg_points = mean(points, na.rm = TRUE),
+    #avg_price = mean(price, na.rm = TRUE)
+  ) %>%
+  rename(name = word) %>%
+  arrange(desc(total))
+
+graph <- ufo_word_correlations %>%
+  rename(weight = correlation) %>%
+  mutate(alpha = weight) %>%
+  graph_from_data_frame(vertices = ufo_averages_per_word)
+
+
+
+
+ggraph(graph, layout = 'fr', niter = 15000) +
+  geom_edge_link(aes(edge_alpha = alpha*5), edge_width = 0.5, colour="white") +
+  geom_node_point(aes(size = total, color = total)) +
+  geom_node_text(
+    aes(label = name), size = 3.5, repel = TRUE, colour="white"
+  )  +
+  labs(
+    title = "Top 50 words in UFO sightings",
+    subtitle = "sized by word frequency"
+  ) +
+  theme_graph() +
+  theme(legend.position="none",
+        plot.background = element_rect(fill="black"),
+        plot.title=element_text(colour="white",hjust=0.5, vjust=0.5, face='bold'),
+        plot.subtitle=element_text(colour="white",hjust=0.5, vjust=0.5, face='bold')) +
+  scale_color_gradient(low = "olivedrab2", high="olivedrab4") +
+  guides(
+    edge_alpha = guide_legend(order = 1),
+    size = guide_legend(order = 2)
+  )
