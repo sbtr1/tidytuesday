@@ -30,73 +30,62 @@ theme_options <- theme(
   plot.margin = margin(t = 40, r = 20, b = 20, l = 20)
 )
 
+incidents <- read_csv("../data/incident.csv")
+incident_words <- incidents %>%
+  unnest_tokens('word', description) %>% 
+  filter(!word %in% stop_words$word) %>% 
+  select(id, word)
+
+
+
 wine_words <- wine_ratings %>%
   unnest_tokens('word', description) %>%
   filter(word %in% wine_adjectives$word) %>%
   select(id, country, points, price, variety, word)
 
-top_wine_words <- wine_words %>%
+
+
+top_incident_words <- incident_words %>%
   group_by(word) %>%
   summarize(total = n()) %>%
   arrange(desc(total)) %>%
-  head(120)
+  head(50)
 
-threshold <- 0.02
+threshold <- 0.1
 
-wine_word_correlations <- wine_words %>%
-  filter(word %in% top_wine_words$word) %>%
+incident_word_correlations <- incident_words %>%
+  filter(word %in% top_incident_words$word) %>%
   pairwise_cor(word, id, sort = TRUE) %>%
   filter(correlation > threshold) %>%
   arrange(desc(correlation))
 
-wine_averages_per_word <- wine_words %>%
-  filter(word %in% top_wine_words$word) %>%
+incident_averages_per_word <- incident_words %>%
+  filter(word %in% top_incident_words$word) %>%
   group_by(word) %>%
   summarize(
-    total = n(),
-    avg_points = mean(points, na.rm = TRUE),
-    avg_price = mean(price, na.rm = TRUE)
+    total = n()
+    #avg_points = mean(points, na.rm = TRUE),
+    #avg_price = mean(price, na.rm = TRUE)
   ) %>%
   rename(name = word) %>%
   arrange(desc(total))
 
-graph <- wine_word_correlations %>%
+graph <- incident_word_correlations %>%
   rename(weight = correlation) %>%
   mutate(alpha = cut(weight, c(threshold, 0.05, 1))) %>%
-  graph_from_data_frame(vertices = wine_averages_per_word)
+  graph_from_data_frame(vertices = incident_averages_per_word)
+
+
+
 
 ggraph(graph, layout = 'fr', niter = 15000) +
   geom_edge_link(aes(edge_alpha = alpha), edge_width = 0.2) +
-  geom_node_point(aes(size = total, color = avg_points)) +
+  geom_node_point(aes(size = total, color = total)) +
   geom_node_text(
     aes(label = name), size = 3, repel = TRUE
-  ) +
-  scale_color_viridis(
-    limits = c(84, 91.5),
-    breaks = c(85.0, 87.5, 90.0, 92.5)
-  ) +
-  scale_size_area(
-    breaks = c(250, 1000, 2500, 5000, 10000, 25000),
-    labels = function(n) { format(n, big.mark = ',') }
-  ) +
-  scale_edge_alpha_manual(
-    values = c(0.03, 0.4), labels = c('weak', 'strong')
-  ) +
+  )  +
   labs(
-    title = paste(
-      'Words in',
-      format(nrow(wine_ratings), big.mark = ','),
-      'Wine Descriptions I.'
-    ),
-    subtitle = paste(
-      '120 common words to describe wine and their correlation',
-      '#tidytuesday 22 | 2019',
-      sep = '   •   '
-    ),
-    caption = '© 2019 spren9er',
-    color = 'Average Rating',
-    size = 'Word Count',
-    edge_alpha = 'Correlation'
+    title = "Top 50 words in Argus incident reports"
   ) +
   theme_void() +
   theme_options +
