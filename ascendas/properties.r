@@ -138,5 +138,5 @@ model_lm <- train(psf ~ .,
                   method = "lm")
   
   
-pred_rf <- predict(model_rf, addressTest)
+summary(model_lm)
 

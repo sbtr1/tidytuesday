@@ -9,6 +9,7 @@ library(lubridate)
 library(ggforce)
 library(widyr)
 library(viridis)
+library(wordcloud)
 
 
 #read data:
@@ -105,11 +106,17 @@ ufo_words <- ufo_sightings %>%
   filter(!word %in% c("44","2","3","4","5", "10","33","quot", "nuforc")) %>% 
   select(id,word)
 
+
+
+
 top_ufo_words <- ufo_words %>%
   group_by(word) %>%
   summarize(total = n()) %>%
   arrange(desc(total)) %>%
-  head(50)
+  head(100)
+
+top_ufo_words %>% 
+  with(wordcloud(word,total))
 
 threshold <- 0.05
 
@@ -138,7 +145,7 @@ graph <- ufo_word_correlations %>%
 
 
 
-ggraph(graph, layout = 'fr', niter = 15000) +
+ggraph(graph, layout = 'auto', niter = 15000) +
   geom_edge_link(aes(edge_alpha = alpha*5), edge_width = 0.5, colour="white") +
   geom_node_point(aes(size = total, color = total)) +
   geom_node_text(
@@ -153,8 +160,4 @@ ggraph(graph, layout = 'fr', niter = 15000) +
         plot.background = element_rect(fill="black"),
         plot.title=element_text(colour="white",hjust=0.5, vjust=0.5, face='bold'),
         plot.subtitle=element_text(colour="white",hjust=0.5, vjust=0.5, face='bold')) +
-  scale_color_gradient(low = "olivedrab2", high="olivedrab4") +
-  guides(
-    edge_alpha = guide_legend(order = 1),
-    size = guide_legend(order = 2)
-  )
+  scale_color_gradient(low = "olivedrab2", high="olivedrab4")
